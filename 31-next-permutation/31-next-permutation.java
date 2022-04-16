@@ -1,25 +1,39 @@
 class Solution {
 
-    public void nextPermutation(int[] A) {
-    if(A == null || A.length <= 1) return;
-    int i = A.length - 2;
-    while(i >= 0 && A[i] >= A[i + 1]) i--; // Find 1st id i that breaks descending order
-    if(i >= 0) {                           // If not entirely descending
-        int j = A.length - 1;              // Start from the end
-        while(A[j] <= A[i]) j--;           // Find rightmost first larger id j
-        swap(A, i, j);                     // Switch i and j
+    public void nextPermutation(int[] nums) {
+        //i is end last element as i+1 will go out of bound
+        int i = nums.length - 2;
+        //j is last element
+        int j = nums.length - 1;
+        if (nums == null || nums.length <= 1) {
+            return;
+        }
+        
+        //setting up the index for i
+        while (i >= 0 && nums[i] >= nums[i + 1]) {
+            i--;
+        }
+        //if i=0 do this work or else just reverse it
+        //if i!=0 that means array just need to be reversed
+        if (i >= 0) {
+            //setting up the index for j
+            while (nums[j] <= nums[i]) {
+                j--;
+            }
+            //swapping i and j
+            int temp = nums[i];
+            nums[i] = nums[j];
+            nums[j] = temp;
+        }
+        //st=i+1 because reversing from the next index of i
+        int st = i+1;
+        int en = nums.length - 1;
+        while (st <= en) {
+            int tempo = nums[st];
+            nums[st] = nums[en];
+            nums[en] = tempo;
+            st++;
+            en--;
+        }
     }
-    reverse(A, i + 1, A.length - 1);       // Reverse the descending sequence
-}
-
-public void swap(int[] A, int i, int j) {
-    int tmp = A[i];
-    A[i] = A[j];
-    A[j] = tmp;
-}
-
-public void reverse(int[] A, int i, int j) {
-    while(i < j) swap(A, i++, j--);
-}
-
 }
