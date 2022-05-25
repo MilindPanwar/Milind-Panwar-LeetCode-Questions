@@ -1,22 +1,16 @@
 class Solution {
-    public int maxProfit(int[] prices) {
-        int sum=0;
-        int max=0;
-//used kadane's algorithm
-        
-        for(int i=1; i<prices.length;i++){
-//adding in sum
-            sum+=prices[i]-prices[i-1];
-//if sum is lesser than 0 then sum=0 else sum remains same.
-            if(sum<0){
-                sum=0;
+
+    public int maxProfit(int[] p) {
+        int min = Integer.MAX_VALUE;
+        int prof = 0;
+        for (int i = 0; i < p.length; i++) {
+            if (p[i] < min) {
+                min = p[i];
             }
-//updating max value if it is lesser than sum
-            if(sum>max){
-                max=sum;
+            if ((p[i] - min) > prof) {
+                prof = p[i] - min;
             }
         }
-        return max;
-        
+        return prof;
     }
 }
