@@ -9,7 +9,7 @@ class Solution {
             i--;
         }
 
-        if (i >= 0) {
+        if (i >= 0) { //i will be zero or in minus if no breakpoint is found
             int j = nums.length - 1;
             while (nums[i] >= nums[j]) {
                 j--;
