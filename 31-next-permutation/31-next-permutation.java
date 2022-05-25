@@ -1,39 +1,38 @@
 class Solution {
 
     public void nextPermutation(int[] nums) {
-        //i is end last element as i+1 will go out of bound
-        int i = nums.length - 2;
-        //j is last element
-        int j = nums.length - 1;
-        if (nums == null || nums.length <= 1) {
+        if (nums.length <= 1 || nums == null) {
             return;
         }
-        
-        //setting up the index for i
+        int i = nums.length - 2;
         while (i >= 0 && nums[i] >= nums[i + 1]) {
             i--;
         }
-        //if i=0 do this work or else just reverse it
-        //if i!=0 that means array just need to be reversed
+
         if (i >= 0) {
-            //setting up the index for j
-            while (nums[j] <= nums[i]) {
+            int j = nums.length - 1;
+            while (nums[i] >= nums[j]) {
                 j--;
             }
-            //swapping i and j
-            int temp = nums[i];
-            nums[i] = nums[j];
-            nums[j] = temp;
+            swap(nums, i, j);
         }
-        //st=i+1 because reversing from the next index of i
-        int st = i+1;
-        int en = nums.length - 1;
-        while (st <= en) {
-            int tempo = nums[st];
-            nums[st] = nums[en];
-            nums[en] = tempo;
-            st++;
-            en--;
+
+        rev(nums, i + 1, nums.length - 1);
+    }
+
+    public void swap(int[] nums, int ind1, int ind2) {
+        int temp = nums[ind1];
+        nums[ind1] = nums[ind2];
+        nums[ind2] = temp;
+    }
+
+    public void rev(int[] nums, int ind1, int ind2) {
+        while (ind1 < ind2) {
+            int temp = nums[ind1];
+            nums[ind1] = nums[ind2];
+            nums[ind2] = temp;
+            ind1++;
+            ind2--;
         }
     }
 }
