@@ -1,22 +1,22 @@
 class Solution {
+
     public int majorityElement(int[] nums) {
-        Map<Integer,Integer> hm= new HashMap<Integer, Integer>();
-        int res=0;        
-        for(int i : nums)
-        {
-            if(!hm.containsKey(i)){
-                //adding number if not present
-                hm.put(i,1);
-            }else{ 
-                //incrementing key value if number is present
-                hm.put(i,hm.get(i)+1);
+        int c = 0;
+        int el = 0;
+        for (int i = 0; i < nums.length; i++) {
+            //if c=0 then the next [i] will be assigned to el
+            if (c == 0) {
+                el = nums[i];
             }
-            if(hm.get(i)>nums.length/2){
-                //i means the number so storing the number in result
-                res=i;
-                break;
+            //if encounter same number
+            if (el == nums[i]) {
+                c++;
             }
-        }
-        return res;
+            //if encounter new number
+            else {
+                c--;
+            }
+        } //el is the only element left which was not cancelled by any other number
+        return el;
     }
 }
