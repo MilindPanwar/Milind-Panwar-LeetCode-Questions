@@ -9,20 +9,17 @@
  * }
  */
 class Solution {
-
     public ListNode middleNode(ListNode head) {
-    
-        ListNode tampu=head; //for determining the size of the LL
-        int sizze=0;
-        while(tampu!=null){
-            tampu= tampu.next;
-            sizze++;
+        ListNode slow=head;
+        ListNode fast=head;
+        while(fast.next!=null){
+            if(fast.next.next==null){
+                slow=slow.next;
+                return slow;
+            }
+            fast=fast.next.next;
+            slow=slow.next;
         }
-        ListNode temp = head;
-        for (int i = 0; i <sizze/2 ; i++) { 
-            //running loop till size/2
-            temp = temp.next;
-        }
-        return temp;
+        return slow;
     }
 }
