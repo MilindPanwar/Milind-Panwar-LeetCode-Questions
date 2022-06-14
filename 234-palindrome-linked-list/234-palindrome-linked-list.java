@@ -11,20 +11,43 @@
 class Solution {
 
     public boolean isPalindrome(ListNode head) {
+        ListNode slow = head;
+        ListNode fast = head;
         
-        //storing the values of LL in ArrayList
-        ArrayList<Integer> arr = new ArrayList<>();
-        while (head != null) {
-            arr.add(head.val);
-            head = head.next;
+        //Part One : Find Middle
+        while (fast.next != null && fast.next.next != null) {
+            slow = slow.next;
+            fast = fast.next.next;
         }
-        //traversing till size/2
-        //comparing from ahead(i increment) and from behind(arr.size-i-1 operation)
-        for (int i = 0; i < arr.size() / 2; i++) {
-            if (arr.get(i) != arr.get(arr.size()-i-1)) {
+        
+        //Part Two : Reverse right half
+        slow.next= rLL(slow.next);
+        
+        //Part Three : Move slow to rigth half
+        slow=slow.next;
+        
+        //Part Four : comparing the values
+        while (slow!=null) {
+            if (head.val != slow.val) {
                 return false;
-            } 
+            }
+            slow = slow.next;
+            head = head.next;
         }
         return true;
     }
+    
+    //Additional Part : Reverse the LL
+    ListNode rLL(ListNode head){
+        ListNode temp=null;
+        while(head!=null){
+            ListNode next=head.next;
+            head.next=temp;
+            temp=head;
+            head=next;
+        }
+        //Returning the as temp stores the starting index or the head of right half
+        return temp;
+    }
+   
 }
