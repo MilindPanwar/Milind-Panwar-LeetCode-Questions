@@ -10,17 +10,34 @@
  * }
  */
 public class Solution {
+
     public ListNode detectCycle(ListNode head) {
-        Set<ListNode> set= new HashSet<>();
-        ListNode temp=head;
-        while(temp!=null){
-            if(set.contains(temp)){
-                return temp;
-            }else{
-                set.add(temp);
-                temp=temp.next;
+        if(head==null || head.next==null){
+            return null;
+        }
+        ListNode slow = head;
+        ListNode fast = head;
+        ListNode entry = head;
+        
+        while (fast.next != null && fast.next.next != null) {
+            //waiting for slow and fast to collide
+            slow = slow.next;
+            fast = fast.next.next;
+            
+            //if slow & fast collids
+            //entry comes in from head
+            //entry and slow starts moving 1 step at a time
+            //waiting slow and entry to collide
+            if (slow == fast) {
+                while (entry != slow) {
+                    slow = slow.next;
+                    entry = entry.next;
+                }
+                //if slow and entry collids that means this is the starting of cycle
+                return slow;
             }
         }
+        //if there is no cycle null is returned
         return null;
     }
 }
