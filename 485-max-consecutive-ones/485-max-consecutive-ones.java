@@ -6,12 +6,11 @@ class Solution {
         for (int i = 0; i < nums.length; i++) {
             if (nums[i] == 1) {
                 c++;
+            }else{
+                c=0;
             }
             if (max < c) {
                 max = c;
-            }
-            if (nums[i] != 1) {
-                c = 0;
             }
         }
         return max;
