@@ -1,31 +1,38 @@
+/*              ALGORITHM
+    1. compare each element from i=0 & j=s.length()-1
+    2. separate function to check if there are any extra element rather than 1
+    3. funtion runs from i+1 or j-1
+    4. function returns false if there are more than 1 element 
+*/
+
+
 class Solution {
 
-    public static boolean pal(String s, int start, int end) {
-        //recursion
-        while (start < end) {
-            if (s.charAt(start) == s.charAt(end)) {
-                start++;
-                end--;
+    public boolean validPalindrome(String s) {
+        int i = 0;
+        int j = s.length() - 1;
+
+        while (i <= j) {
+            if (s.charAt(i) == s.charAt(j)) {
+                i++;
+                j--;
             } else {
-                //if it is still not equal return false
-                return false;
+                return isPal(s, i + 1, j) || isPal(s, i, j - 1);
             }
         }
         return true;
     }
 
-    public boolean validPalindrome(String s) {
-        int start = 0;
-        int end = s.length() - 1;
-        while (start < end) {
-            if (s.charAt(start) == s.charAt(end)) {
-                start++;
-                end--;
+    public boolean isPal(String s, int i, int j) {
+        //funtion returns true only if there is only one extra element which is stopping palindrome
+        //if it returns false that means there are more than one elements 
+        //if more than 1 element is present that means it cannot become a palindrome
+        while (i <= j) {
+            if (s.charAt(i) == s.charAt(j)) {
+                i++;
+                j--;
             } else {
-                //if case 1 is false another, case 2 is checked
-                // if both are false , false is returned
-                return pal(s, start + 1, end) || pal(s, start, end - 1);
-                //above pal 1st one is true then it is chosen otherwise 2nd one is chosen
+                return false;
             }
         }
         return true;
