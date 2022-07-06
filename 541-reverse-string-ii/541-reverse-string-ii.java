@@ -1,26 +1,32 @@
+                /*ALGORITHM
+    1. make copy of string in stringbuilder
+    2. while loop for incrementing k
+    3. inner while loop for swapping the elements
+    
+*/
+
 class Solution {
 
     public String reverseStr(String s, int k) {
-        
-        //convert string to array of characters
-        char[] c = s.toCharArray();
-        
-        //increment i to 2
-        for (int i = 0; i < s.length(); i += 2 * k) {
-            int start = i;
+        StringBuilder sb = new StringBuilder(s);
+
+        int l = 0;
+        while (l < sb.length()) {
+            int i = l;
             
-            //condition given in question
-            int end = Math.min(i + k - 1, c.length - 1);
-            
-            while (start < end) {
-                char temp = c[start];
-                c[start] = c[end];
-                c[end] = temp;
-                start++;
-                end--;
+            //the most important step is to initialize "j" everytime
+            int j = Math.min(l+k, sb.length())-1;
+            //l+k works if elements equal to k or greater than k is left
+            //sb.length works if like elements left is 2 and k is 3
+            while (i < j) {
+                StringBuilder t = new StringBuilder(sb);
+                sb.setCharAt(i, t.charAt(j));
+                sb.setCharAt(j, t.charAt(i));
+                i++;
+                j--;
             }
+            l = l + (2 * k);
         }
-        //convert char array to string and return
-        return String.valueOf(c);
+        return sb.toString();
     }
 }
