@@ -1,23 +1,26 @@
 class Solution {
 
     public boolean checkRecord(String s) {
-        int ca = 0;
-        int cl = 0;
-        int sum=0;
-        int max=Integer.MIN_VALUE;
+        int a = 0;
+        int l = 0;
+        int p = 0;
+
         for (int i = 0; i < s.length(); i++) {
-            if(s.charAt(i)=='A'){
-                ca++;
+            if (s.charAt(i) == 'P') {
+                p++;
             }
-            if(s.charAt(i)=='L'){
-                sum++;
-                if(sum>max){
-                    max=sum;
+            if (s.charAt(i) == 'A') {
+                a++;
+                if (a >1) {
+                    return false;
                 }
-            }else sum=0;
+            }
+            if (s.charAt(i) == 'L' && i < s.length() - 2) {
+                if (s.charAt(i + 1) == 'L' && s.charAt(i + 2) == 'L') {
+                    return false;
+                }
+            }
         }
-        if(ca<2 && max <3){
-            return true;
-        }else return false;
+        return true;
     }
 }
