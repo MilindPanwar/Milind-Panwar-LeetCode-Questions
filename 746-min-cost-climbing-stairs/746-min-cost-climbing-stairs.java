@@ -13,6 +13,7 @@ class Solution {
             dp[i] = Math.min(dp[i - 1] + cost[i], dp[i - 2] + cost[i]);
         }
         //returning the minimum value
+        
         return Math.min(dp[n - 1], dp[n - 2]);
     }
 }
