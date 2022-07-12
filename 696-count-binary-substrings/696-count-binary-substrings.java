@@ -1,13 +1,17 @@
 class Solution {
+
     public int countBinarySubstrings(String s) {
-        int curr = 1, prev = 0, ans = 0;
-        for (int i = 1; i < s.length(); i++)
-            if (s.charAt(i) == s.charAt(i-1)) curr++;
-            else {
-                ans += Math.min(curr, prev);
+        int count = 0, prev = 0, i = 1, curr = 1;
+        while (i < s.length()) {
+            if (s.charAt(i) != s.charAt(i - 1)) {
+                count += Math.min(prev, curr);
                 prev = curr;
                 curr = 1;
+            } else {
+                curr++;
             }
-        return ans + Math.min(curr, prev);
+            i++;
+        }
+        return count += Math.min(prev, curr);
     }
 }
