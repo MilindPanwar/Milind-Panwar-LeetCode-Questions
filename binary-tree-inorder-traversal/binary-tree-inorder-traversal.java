@@ -21,9 +21,9 @@ class Solution {
         if(root==null){
             return list;
         }
-        helper(root.left, list);
-        list.add(root.val);
-        helper(root.right, list);
+        helper(root.left, list); //extreme left mein ghusjao
+        list.add(root.val); //root li value list mei daldo
+        helper(root.right, list); //extreme right mei ghusjao
         return list;
         
     }
