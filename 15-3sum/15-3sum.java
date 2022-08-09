@@ -1,27 +1,33 @@
 class Solution {
-
     public List<List<Integer>> threeSum(int[] nums) {
-        Arrays.sort(nums); //sorting the array is important
-        List<List<Integer>> result = new ArrayList<>();
-
-        for (int i = 0; i < nums.length - 2; i++) { //till 3rd last index
-            if (i == 0 || (i > 0 && nums[i] != nums[i - 1])) { //checking/skipping duplicate n[i]
-                int lo = i + 1, hi = nums.length - 1, sum = 0 - nums[i];
-                while (lo < hi) {
-                    if (nums[lo] + nums[hi] == sum) {
-                        result.add(Arrays.asList(nums[i], nums[lo], nums[hi]));
-                        while (lo < hi && nums[lo] == nums[lo + 1]) lo++; //skipping duplicate lo
-                        while (lo < hi && nums[hi] == nums[hi -1]) hi--; //skipping duplicate hi
-                        hi--;
-                        lo++;
-                    } else if (nums[lo] + nums[hi] < sum) {
-                        lo++;
-                    } else {
-                        hi--;
-                    }
+        Arrays.sort(nums);
+        Set<List<Integer>> result= new HashSet<>();
+        if(nums==null || nums.length<3){
+            return new ArrayList<>();
+        }
+        
+        for(int i=0;i<nums.length;i++){
+            int l=i+1;
+            int r=nums.length-1;
+            if(l==nums.length) break;
+            
+            while(l<r){
+                int sum = nums[i]+nums[r]+nums[l];
+                if(sum==0){
+                    List<Integer> list =new ArrayList<>();
+                    list.add(nums[i]);
+                    list.add(nums[r]);
+                    list.add(nums[l]);
+                    result.add(list);
+                    l++;
+                    r--;
+                }else if(sum<0){
+                    l++;
+                }else{
+                    r--;
                 }
             }
         }
-        return result;
+        return new ArrayList<>(result);
     }
 }
