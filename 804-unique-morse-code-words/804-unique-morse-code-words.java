@@ -1,17 +1,14 @@
 class Solution {
-    public int uniqueMorseRepresentations(String[] words) {
-        String[] arr={".-","-...","-.-.","-..",".","..-.","--.","....","..",".---","-.-",".-..","--","-.","---",".--.","--.-",".-.","...","-","..-","...-",".--","-..-","-.--","--.."};
-        Set<String> hs= new HashSet<>();
-        for(String i : words){
-            String temp="";
-            for(int j=0;j<i.length();j++){
-                int num= i.charAt(j);
-                temp=temp+arr[num%97];
-            }
-            if(!hs.contains(temp)){
-                hs.add(temp);
-            }
+
+      public int uniqueMorseRepresentations(String[] words) {
+        String[] d = {".-", "-...", "-.-.", "-..", ".", "..-.", "--.", "....", "..", ".---", "-.-", ".-..", "--", "-.", "---", ".--.", "--.-", ".-.", "...", "-", "..-", "...-", ".--", "-..-", "-.--", "--.."};
+        HashSet<String> s = new HashSet<>();
+        for (String w : words) {
+            StringBuilder sb = new StringBuilder();
+            for (int i = 0; i < w.length(); ++i)
+                sb.append(d[w.charAt(i) - 'a']);
+            s.add(sb.toString());
         }
-        return hs.size();
+        return s.size();
     }
 }
