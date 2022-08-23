@@ -1,27 +1,19 @@
 class Solution {
-
     public boolean canPlaceFlowers(int[] flowerbed, int n) {
-        int count = 0;
-        for (int i = 0; i < flowerbed.length; i++) {
-            if (flowerbed[i] == 0) {
-                // if i is starting index, put pre=0
-                // if index-1, which is if previous index is zero
-                // put zero else one
-                int pre = (i == 0 || flowerbed[i - 1] == 0) ? 0 : 1;
-                // if i is ending index, put nex=0;
-                // if index+1, which is if next index is zero
-                // put zero else one
-                int nex = (i == flowerbed.length - 1 || flowerbed[i + 1] == 0) ? 0 : 1;
-                // if pre and nex both are zero that means we can plant here
-                // planting means incrementing count by one
-                if (pre == 0 && nex == 0) {
-                    flowerbed[i] = 1;
-                    count++;
+        int count=0; //count karenge kahan ki kahan pushp place karsakte hain
+        
+        for(int i=0;i<flowerbed.length;i++){
+            if(flowerbed[i]==0){ //agar current element 0 hai
+                int prev= (i==0 || flowerbed[i-1]==0) ? 0 : 1;  // normal if statement
+                int next= (i==flowerbed.length-1 || flowerbed[i+1]==0) ? 0 : 1 ; // statement       
+                if(prev==0 && next==0){ //dono 0 hain to pushp place kardo
+                    flowerbed[i]=1;
+                    count++; //count bada do
                 }
             }
+            
         }
-        // if count is greater or equal to n
-        // return true else false
-        return count >= n;
+        return count>=n; //count agar equal ya greater hai to true return kardo
+        
     }
 }
