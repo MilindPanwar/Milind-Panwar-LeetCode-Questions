@@ -1,32 +1,24 @@
 class Solution {
 
     public int maximumProduct(int[] nums) {
-        int max1 = Integer.MIN_VALUE;
-        int max2 = Integer.MIN_VALUE;
-        int max3 = Integer.MIN_VALUE;
-        int min1 = Integer.MAX_VALUE;
-        int min2 = Integer.MAX_VALUE;
-        // finding the three largest element by using one pass
-        for (int n : nums) {
-            if (n > max1) {
-                max3 = max2;
-                max2 = max1;
-                max1 = n;
-            } else if (n > max2) {
-                max3 = max2;
-                max2 = n;
-            } else if (n > max3) {
-                max3 = n;
-            }
-            // for negative value max_value will not work so min value is extracted which is indirectly max value for finding the product
-            if (n < min1) {
-                min2 = min1;
-                min1 = n;
-            } else if (n < min2) {
-                min2 = n;
-            }
-        }
-        // using math.max function to find the max product from positive and negative values
-        return Math.max(max1 * max2 * max3, max1 * min1 * min2);
+        
+        //array sort karlo, taaki badi values end mei chali jae
+        Arrays.sort(nums);
+        
+        //array ka size daldo ek variable mei, easy hoga aage ke liye
+        int n=nums.length;
+        
+        //agar array ki sari values positive hai
+        int p = nums[n-3]*nums[n-2]*nums[n-1]; 
+        
+        //agar array mein negative values bhi hai
+        //negative values hai to aage se do utha lenge
+        //kyuki negative hai to aage ki do values sabse badi 
+        //aur fir ek last ki sabse badi
+        int q= nums[0]*nums[1]*nums[n-1];
+        
+        
+        //p aur q mei se jo bada hai usko lauta do
+        return Math.max(p,q);
     }
 }
