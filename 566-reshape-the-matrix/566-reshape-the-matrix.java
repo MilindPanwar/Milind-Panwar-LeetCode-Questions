@@ -5,18 +5,22 @@ class Solution {
         int n = mat[0].length;
 
         if (m * n != r * c) {
-            return mat;
+            return mat; //as per a rule given in question
         }
+
         int[][] rc = new int[r][c];
-        int x = 0;
-        int y = 0;
+        int row = 0; // new counter for row updation 
+        int column = 0; // new counter for column updation
+        
         for (int i = 0; i < m; i++) {
             for (int j = 0; j < n; j++) {
-                rc[x][y] = mat[i][j];
-                y++;
-                if (y == c) {
-                    x++;
-                    y = 0;
+                
+                rc[row][column] = mat[i][j];
+                
+                column++; 
+                if (column == c) { //if counter column reaches end of row
+                    row++; //update row by 1
+                    column = 0; //set column to 0 
                 }
             }
         }
