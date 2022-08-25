@@ -1,19 +1,15 @@
 class Solution {
 
     public int minCostClimbingStairs(int[] cost) {
-        int[] dp = new int[cost.length];
-        dp[0] = cost[0];
-        dp[1] = cost[1];
-        int n = cost.length;
+            // 2 se shuru kiya kyunki cost[i-1] aur cost[i-2] karna hai
         for (int i = 2; i < cost.length; i++) {
-            //dp[i-1] means i-1th element
-            //dp[i-2] means i-2th element
-            //cost[i] means the current element on which we are now
-            //calculating the minimum of these and storing in dp[i]
-            dp[i] = Math.min(dp[i - 1] + cost[i], dp[i - 2] + cost[i]);
+            //cost[i] bharte chale jaenge hum
+            cost[i] += Math.min(cost[i - 1], cost[i - 2]);
+            //agar i-1 ya i-2 chota hai to current index pe usko store kardo array mein
+            //aese minimum element end tak store hojaega
+            
         }
-        //returning the minimum value
         
-        return Math.min(dp[n - 1], dp[n - 2]);
+        return Math.min(cost[cost.length - 1], cost[cost.length - 2]);
     }
 }
