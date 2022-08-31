@@ -1,26 +1,27 @@
 class Solution {
-
     public boolean checkRecord(String s) {
-        int a = 0;
-        int l = 0;
-        int p = 0;
-
-        for (int i = 0; i < s.length(); i++) {
-            if (s.charAt(i) == 'P') {
-                p++;
+        int absent=0;
+        int late=0;
+       
+        int al=0;
+        for(int i=0;i<s.length();i++){
+            if(s.charAt(i)=='A'){
+                absent++;
             }
-            if (s.charAt(i) == 'A') {
-                a++;
-                if (a >1) {
-                    return false;
+            if(s.charAt(i)=='L'){
+                al++;
+                if(al>=3){
+                    late++;
                 }
-            }
-            if (s.charAt(i) == 'L' && i < s.length() - 2) {
-                if (s.charAt(i + 1) == 'L' && s.charAt(i + 2) == 'L') {
-                    return false;
-                }
+            }else{
+                al=0;
             }
         }
-        return true;
+        if(absent>=2 || late>0){
+            return false;
+        }else{
+            return true;
+        }
+        
     }
 }
