@@ -1,36 +1,42 @@
 class Solution {
 
     public String toGoatLatin(String sentence) {
-        int c = 1;
         StringBuilder res = new StringBuilder();
-        String[] words = sentence.split("\\W+");
-
-        for (String i : words) {
-            StringBuilder sb = new StringBuilder(i);
-
-            if (i.startsWith("a") || i.startsWith("e") || i.startsWith("i") || i.startsWith("o") || i.startsWith("u") || i.startsWith("A") || i.startsWith("E") || i.startsWith("I") || i.startsWith("O") || i.startsWith("U")) {
+        String[] words = sentence.split(" ");
+        StringBuilder a = new StringBuilder();
+        int i = 0;
+        for (String w : words) {
+            StringBuilder sb = new StringBuilder(w);
+            if (
+                sb.charAt(0) == 'a' ||
+                sb.charAt(0) == 'e' ||
+                sb.charAt(0) == 'i' ||
+                sb.charAt(0) == 'o' ||
+                sb.charAt(0) == 'u' ||
+                sb.charAt(0) == 'A' ||
+                sb.charAt(0) == 'E' ||
+                sb.charAt(0) == 'I' ||
+                sb.charAt(0) == 'O' ||
+                sb.charAt(0) == 'U'
+            ) {
                 sb.append("ma");
-                int k = 0;
-                while (k < c) {
-                    sb.append("a");
-                    k++;
-                }
             } else {
-                char ch = sb.charAt(0);
-                sb.deleteCharAt(0);
-                sb.append(ch);
-
+                char c = sb.charAt(0);
+                String l = String.valueOf(c);
+                StringBuilder let = new StringBuilder(l);
+                sb.append(let);
                 sb.append("ma");
-                int k = 0;
-                while (k < c) {
-                    sb.append("a");
-                    k++;
-                }
+                sb.deleteCharAt(0);
             }
+            
+            int length = sb.length();
+            a.append("a");
+            sb.append(a);
+            i++;
+
             res.append(sb + " ");
-            c++;
         }
         res.deleteCharAt(res.length()-1);
         return res.toString();
-    }      
+    }
 }
