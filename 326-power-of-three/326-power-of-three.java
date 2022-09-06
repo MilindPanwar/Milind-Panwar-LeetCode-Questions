@@ -2,6 +2,7 @@ class Solution {
     public boolean isPowerOfThree(int n) {
         long nn=(long)n;
         long m=nn;
+        
         if(n==0){
             return false;
         }
@@ -9,6 +10,9 @@ class Solution {
             return true;
         }
         if(n==-1){
+            return false;
+        }
+        if(nn%3!=0){
             return false;
         }
         int ans=p(3,m);
