@@ -1,24 +1,30 @@
 class Solution {
-    public int minDistance(String W1, String W2) {
-        int m = W1.length(), n = W2.length();
-        if (m < n) {
-            String tempStr = W1;
-            W1 = W2;
-            W2 = tempStr;
-            int tempInt = n;
-            n = m;
-            m = tempInt;
+
+    public int minDistance(String w1, String w2) {
+    
+        int n = w1.length();
+        int m = w2.length();
+
+        int[][] dp = new int[n][m];
+        for (int rows[] : dp) {
+            Arrays.fill(rows, -1);
         }
-        char[] WA1 = W1.toCharArray(), WA2 = W2.toCharArray();
-        int[] dpLast = new int[n+1], dpCurr = new int[n+1];
-        for (char c1 : WA1) {
-            for (int j = 0; j < n; j++) 
-                dpCurr[j+1] = c1 == WA2[j]
-                    ? dpLast[j] + 1
-                    : Math.max(dpCurr[j], dpLast[j+1]);
-            int[] tempArr = dpLast;
-            dpLast = dpCurr;
-            dpCurr = tempArr;
+
+        int l= helper(w1, w2, w1.length()-1, w2.length()-1, dp);
+        return w1.length()+w2.length()-2*l;
+    }
+
+    public static int helper(String s1, String s2, int in1, int in2, int[][] dp) {
+        if (in1 < 0 || in2 < 0) {
+            return 0;
         }
-        return m + n - 2 * dpLast[n];
-    }}
+        if (dp[in1][in2] != -1) {
+            return dp[in1][in2];
+        }
+        if (s1.charAt(in1) == s2.charAt(in2)) {
+            return dp[in1][in2] = 1 + helper(s1, s2, in1 - 1, in2 - 1, dp);
+        } else {
+            return dp[in1][in2] = 0 + Math.max(helper(s1, s2, in1 - 1, in2, dp), helper(s1, s2, in1, in2 - 1, dp));
+        }
+    }
+}
