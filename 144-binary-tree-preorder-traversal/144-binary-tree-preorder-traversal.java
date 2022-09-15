@@ -14,19 +14,24 @@
  * }
  */
 class Solution {
-
     public List<Integer> preorderTraversal(TreeNode root) {
-        return helper(root, new ArrayList());
-    }
-
-    public static List<Integer> helper(TreeNode root, List<Integer> list) {
-        if (root == null) {
-            return list;
+        List<Integer> preo=new ArrayList<Integer>();
+        if(root==null){
+            return preo;
         }
-        list.add(root.val); //root ki value list mein daldo
-
-        helper(root.left, list); //Tree mein left side badjao, recursion call lagao
-        helper(root.right, list); //Tree mein rigth side badjao, recursion call lagao
-        return list;
+        Stack<TreeNode> st= new Stack<TreeNode>();
+        st.push(root);
+        while(!st.isEmpty()){
+            root=st.pop();
+            preo.add(root.val);
+            if(root.right!=null){
+                st.push(root.right);
+            }
+            if(root.left!=null){
+                st.push(root.left);
+            }
+        }
+        return preo;
+        
     }
 }
