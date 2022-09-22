@@ -1,26 +1,25 @@
 class Solution {
-    List<String> ans;
-    Map<Character, Character> codex;
-    char[] cipher;
-    
     public List<String> findAndReplacePattern(String[] words, String pattern) {
-        ans = new ArrayList<>();
-        codex = new HashMap<>();
-        cipher = pattern.toCharArray();
-        for (int i = 0; i < pattern.length(); i++)
-            cipher[i] = translate(cipher[i]);
-        for (String word : words) compare(word);
-        return ans;
+        int[] p = f(pattern);//function banaya hai "f" naamka
+        //pehlai "f" function dekho, jao.
+        ArrayList<String> list= new ArrayList<>();
+        for(String w : words){
+            
+            if(Arrays.equals(f(w),p)){
+                list.add(w);
+            }
+        }
+        return list;
     }
-    private char translate(char c) {
-        if (!codex.containsKey(c))
-            codex.put(c, (char)(97 + codex.size()));
-        return codex.get(c);
-    }
-    private void compare(String word) {
-        codex.clear();
-        for (int i = 0; i < word.length(); i++)
-            if (translate(word.charAt(i)) != cipher[i]) return;
-        ans.add(word);
+    public static int[] f(String p){
+        int n=p.length(); //length ko "n" mei store karva lia
+        int[] res= new int[n]; //isme answer dalke return karvaenge
+        HashMap<Character, Integer> m= new HashMap<>(); //hashmap taki kaam jaldi ho
+        for(int i=0;i<n;i++){
+            m.putIfAbsent(p.charAt(i),m.size()); //agar hashmap mei nahi hai "p" ka curr char to hashmap mei wo curr char dalo aur hashmap ka size dalo
+             res[i]=m.get(p.charAt(i));//array mei store karado 
+        }
+        return res;
+        
     }
 }
