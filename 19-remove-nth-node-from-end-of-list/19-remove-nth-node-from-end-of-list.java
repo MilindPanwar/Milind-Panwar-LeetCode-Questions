@@ -16,10 +16,10 @@ class Solution {
         start.next = head; //its a prev node of head
         ListNode prev = start;
         ListNode ahead = start;
-        for (int i =0; i <n; i++) {
+        for (int i = 0; i < n; i++) {
             ahead = ahead.next; //stores the value to move prev pointer
         }
-        if(ahead.next==null){
+        if (ahead.next == null) {
             return head.next; //edge condition (if 1st node should be removed)
             //return head.next as head will be deleted
         }
