@@ -1,28 +1,23 @@
-
 class Solution {
-
-    public void setZeroes(int[][] m) {
-        int[][] d1 = new int[1][m[0].length];
-        int[][] d2 = new int[m.length][1];
-
-        for (int i = 0; i < m.length; i++) {
-            for (int j = 0;j< m[0].length; j++) {
-                if (m[i][j] == 0) {
-                    d1[0][j] = -1;
-                    d2[i][0] = -1;
+    public void setZeroes(int[][] matrix) {
+        int[] r= new int[matrix.length];
+        int[] c= new int[matrix[0].length];
+        for(int i=0;i<matrix.length;i++){
+            for(int j=0;j<matrix[0].length;j++){
+                if(matrix[i][j]==0){
+                    r[i]=-1;
+                    c[j]=-1;
                 }
             }
         }
-
-        for (int i = 0; i<m.length; i++) {
-            for (int j = 0;j< m[0].length; j++) {
-                if (d1[0][j] == -1 || d2[i][0] == -1) {
-                    m[i][j] = 0;
+          for(int i=0;i<r.length;i++){
+            for(int j=0;j<c.length;j++){
+                if( r[i]==-1 || c[j]==-1){
+                   matrix[i][j]=0;
                 }
             }
         }
+        
+        
     }
 }
-
-
-
