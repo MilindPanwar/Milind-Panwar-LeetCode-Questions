@@ -9,17 +9,21 @@
  * }
  */
 class Solution {
-
     public ListNode middleNode(ListNode head) {
-        ListNode slow = head;
-        ListNode fast = head;
-        //fast!=null (agar boundary cross kargaya) 
-        //fast.next!=null (agar just boundary pe hai)
-        //then just terminate the while loop, slow stores the required node automatically
-        while (fast != null && fast.next != null) {
-            slow = slow.next;
-            fast = fast.next.next;
+        int size=0;
+        ListNode dummy= head;
+        while(dummy!=null){
+            size++;
+            dummy=dummy.next;
         }
-        return slow;
+        int iter=size/2;
+        ListNode dm=head;
+        int i=0;
+        while( i<iter){
+            dm=dm.next;
+            i++;
+        }
+        return dm;
+        
     }
 }
