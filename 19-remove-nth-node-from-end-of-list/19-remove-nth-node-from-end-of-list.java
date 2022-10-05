@@ -11,23 +11,25 @@
 class Solution {
 
     public ListNode removeNthFromEnd(ListNode head, int n) {
-        //start as a dummy node
-        ListNode start = new ListNode();
-        start.next = head; //its a prev node of head
-        ListNode prev = start;
-        ListNode ahead = start;
-        for (int i = 0; i < n; i++) {
-            ahead = ahead.next; //stores the value to move prev pointer
+        int size = 0;
+        ListNode s1 = head;
+        while (s1 != null) {
+            size++;
+            s1 = s1.next;
         }
-        if (ahead.next == null) {
-            return head.next; //edge condition (if 1st node should be removed)
-            //return head.next as head will be deleted
+        ListNode tmp = head;
+        int ptr = 1;
+        int itr = size - n;
+        if (itr == 0) {
+            return head.next;
         }
-        while (ahead.next != null) {
-            ahead = ahead.next;
-            prev = prev.next;
+        while (ptr < itr) {
+            tmp = tmp.next;
+            ptr++;
         }
-        prev.next = prev.next.next; //suppose prev is 1 and prev..next.next is on 3 so the 2 is deleted here
+
+        tmp.next = tmp.next.next;
+
         return head;
     }
 }
