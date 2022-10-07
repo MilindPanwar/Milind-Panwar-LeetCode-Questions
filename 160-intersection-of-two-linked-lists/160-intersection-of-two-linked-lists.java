@@ -12,23 +12,17 @@
 public class Solution {
 
     public ListNode getIntersectionNode(ListNode headA, ListNode headB) {
-        ListNode temp1 = headA;
-        ListNode temp2 = headB;
-        if(headA==null || headB==null){
-            return null;
-        }
-        while (temp1 != temp2) { //stop if both node are same
-            if (temp1 == null) { //if it reaches null
-                temp1 = headB; //point it to other LL's head
-            } else {
-                temp1 = temp1.next; //else just increment
+        ListNode h1 = headA;
+        while (h1 != null) {
+            ListNode h2=headB;
+            while (h2 != null) {
+                if (h1 == h2) {
+                    return h1;
+                }
+                h2 = h2.next;
             }
-            if (temp2 == null) {
-                temp2 = headA;
-            } else {
-                temp2 = temp2.next;
-            }
+            h1 = h1.next;
         }
-        return temp1; //return any of the dummy node
+        return null;
     }
 }
