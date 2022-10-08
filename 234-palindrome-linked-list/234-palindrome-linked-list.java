@@ -9,32 +9,36 @@
  * }
  */
 class Solution {
-
     public boolean isPalindrome(ListNode head) {
-        ListNode h = head;
-        int size = 0;
-        while (h != null) {
-            size++;
-            h = h.next;
+        ListNode fast=head;
+        ListNode slow=head;
+        while(fast.next!=null && fast.next.next!=null){
+            fast=fast.next.next;
+            slow=slow.next;
         }
-        int[] arr = new int[size];
-        h = head;
-        int i = 0;
-        while (h != null) {
-            arr[i] = h.val;
-            i++;
-            h = h.next;
-        }
-        int st = 0;
-        int en = arr.length - 1;
-        while (st < en) {
-            if (arr[st] == arr[en]) {
-                st++;
-                en--;
-            } else {
+       slow.next=rev(slow.next);
+        slow=slow.next;
+        ListNode dummy=head;
+        while(slow!=null){
+            if(slow.val!=dummy.val){
                 return false;
             }
+            slow=slow.next;
+            dummy=dummy.next;
         }
         return true;
+        
+        
+    }
+    public ListNode rev(ListNode ptr){
+        ListNode prev=null;
+        ListNode next=null;
+        while(ptr!=null){
+            next=ptr.next;
+            ptr.next=prev;
+            prev=ptr;
+            ptr=next;
+        }
+        return prev;
     }
 }
