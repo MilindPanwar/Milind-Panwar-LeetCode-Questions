@@ -23,6 +23,6 @@ class Solution {
                 }
             }
         }
-        return new ArrayList<List<Integer>>(res);
+        return new ArrayList<>(res);
     }
 }
