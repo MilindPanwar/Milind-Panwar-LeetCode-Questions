@@ -2,14 +2,9 @@ class Solution {
 
     public List<List<Integer>> threeSum(int[] nums) {
         Set<List<Integer>> res = new HashSet<>();
-        if (nums.length == 0) return new ArrayList<>(res);
         Arrays.sort(nums);
 
         for (int i = 0; i < nums.length - 2; i++) {
-            if (i > 0 && nums[i] == nums[i - 1]) {
-                // skip same result
-                continue;
-            }
             int left = i + 1;
             int right = nums.length - 1;
 
@@ -27,6 +22,6 @@ class Solution {
                 }
             }
         }
-        return new ArrayList<>(res);
+        return new ArrayList<List<Integer>>(res);
     }
 }
