@@ -1,54 +1,27 @@
 class Solution {
-
     public String reverseVowels(String s) {
-        StringBuilder vow = new StringBuilder();
-        for (int i = s.length() - 1; i >= 0; i--) {
-            if (
-                s.charAt(i) == 'a' ||
-                s.charAt(i) == 'e' ||
-                s.charAt(i) == 'i' ||
-                s.charAt(i) == 'o' ||
-                s.charAt(i) == 'u' ||
-                s.charAt(i) == 'A' ||
-                s.charAt(i) == 'E' ||
-                s.charAt(i) == 'I' ||
-                s.charAt(i) == 'O' ||
-                s.charAt(i) == 'U'
-            ) {
-                vow.append(s.charAt(i));
+        char[] c=s.toCharArray();
+        int p1=0;
+        int p2=c.length-1;
+        while(p1<p2){
+            
+            while(p1<p2 && !vow(c[p1])){
+                p1++;
             }
-        }
-
-        int i = 0;
-        int p2 = 0;
-        StringBuilder ans = new StringBuilder();
-        while (p2 < vow.length()) {
-            if (
-                s.charAt(i) == 'a' ||
-                s.charAt(i) == 'e' ||
-                s.charAt(i) == 'i' ||
-                s.charAt(i) == 'o' ||
-                s.charAt(i) == 'u' ||
-                s.charAt(i) == 'A' ||
-                s.charAt(i) == 'E' ||
-                s.charAt(i) == 'I' ||
-                s.charAt(i) == 'O' ||
-                s.charAt(i) == 'U'
-            ) {
-                ans.append(vow.charAt(p2));
-                p2++;
-                i++;
-            } else {
-                ans.append(s.charAt(i));
-                i++;
+            while(p1<p2 && !vow(c[p2])){
+                p2--;
             }
+            char t= c[p1];
+            c[p1]=c[p2];
+            c[p2]=t;
+            p1+=1;
+            p2-=1;
         }
-        if (i < s.length()) {
-            while (i < s.length()) {
-                ans.append(s.charAt(i));
-                i++;
-            }
-        }
-        return ans.toString();
+        String str= new String(c);
+        return str;
+    }
+     public boolean vow(char c){
+        c= Character.toLowerCase(c);
+        return c=='a' ||c=='e' ||c=='i' ||c=='o' ||c=='u';
     }
 }
