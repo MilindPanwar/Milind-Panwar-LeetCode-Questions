@@ -1,7 +1,7 @@
 class Solution {
 
     public String reverseVowels(String s) {
-        String vow = "";
+        StringBuilder vow = new StringBuilder();
         for (int i = s.length() - 1; i >= 0; i--) {
             if (
                 s.charAt(i) == 'a' ||
@@ -15,13 +15,13 @@ class Solution {
                 s.charAt(i) == 'O' ||
                 s.charAt(i) == 'U'
             ) {
-                vow = vow + s.charAt(i);
+                vow.append(s.charAt(i));
             }
         }
 
         int i = 0;
         int p2 = 0;
-        String ans = "";
+        StringBuilder ans = new StringBuilder();
         while (p2 < vow.length()) {
             if (
                 s.charAt(i) == 'a' ||
@@ -35,20 +35,20 @@ class Solution {
                 s.charAt(i) == 'O' ||
                 s.charAt(i) == 'U'
             ) {
-                ans = ans + vow.charAt(p2);
+                ans.append(vow.charAt(p2));
                 p2++;
                 i++;
             } else {
-                ans = ans + s.charAt(i);
+                ans.append(s.charAt(i));
                 i++;
             }
         }
         if (i < s.length()) {
-            while (i <s.length()) {
-                ans = ans + s.charAt(i);
+            while (i < s.length()) {
+                ans.append(s.charAt(i));
                 i++;
             }
         }
-        return ans;
+        return ans.toString();
     }
 }
