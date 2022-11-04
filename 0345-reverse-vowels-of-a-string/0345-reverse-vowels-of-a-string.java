@@ -1,26 +1,54 @@
-public class Solution {
+class Solution {
+
     public String reverseVowels(String s) {
-        if (s == null) {
-            throw new IllegalArgumentException();
+        String vow = "";
+        for (int i = s.length() - 1; i >= 0; i--) {
+            if (
+                s.charAt(i) == 'a' ||
+                s.charAt(i) == 'e' ||
+                s.charAt(i) == 'i' ||
+                s.charAt(i) == 'o' ||
+                s.charAt(i) == 'u' ||
+                s.charAt(i) == 'A' ||
+                s.charAt(i) == 'E' ||
+                s.charAt(i) == 'I' ||
+                s.charAt(i) == 'O' ||
+                s.charAt(i) == 'U'
+            ) {
+                vow = vow + s.charAt(i);
+            }
         }
-        if (s.length() <= 1) {
-            return s;
+
+        int i = 0;
+        int p2 = 0;
+        String ans = "";
+        while (p2 < vow.length()) {
+            if (
+                s.charAt(i) == 'a' ||
+                s.charAt(i) == 'e' ||
+                s.charAt(i) == 'i' ||
+                s.charAt(i) == 'o' ||
+                s.charAt(i) == 'u' ||
+                s.charAt(i) == 'A' ||
+                s.charAt(i) == 'E' ||
+                s.charAt(i) == 'I' ||
+                s.charAt(i) == 'O' ||
+                s.charAt(i) == 'U'
+            ) {
+                ans = ans + vow.charAt(p2);
+                p2++;
+                i++;
+            } else {
+                ans = ans + s.charAt(i);
+                i++;
+            }
         }
-        char[] str = s.toCharArray();
-        for (int i = 0, j = str.length - 1; i < j; i++, j--) {
-            while (i < j && !isVowel(str[i])) i++;
-            while (i < j && !isVowel(str[j])) j--;
-            if (i <= j) swap(str, i, j);
+        if (i < s.length()) {
+            while (i <s.length()) {
+                ans = ans + s.charAt(i);
+                i++;
+            }
         }
-        return new String(str);
-    }
-    private boolean isVowel(char ch) {
-        char c = Character.toLowerCase(ch);
-        return c == 'a' || c == 'e' || c == 'i' || c == 'o' || c == 'u';
-    }
-    private void swap(char[] str, int i, int j) {
-        char tmp = str[i];
-        str[i] = str[j];
-        str[j] = tmp;
+        return ans;
     }
 }
