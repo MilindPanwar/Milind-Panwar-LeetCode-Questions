@@ -13,7 +13,7 @@ class Solution {
             while (i <= j && !Character.isLetterOrDigit(s.charAt(j))) {
                 j--;
             }
-            if (i <= j && s.charAt(i) != s.charAt(j)) {
+            if (i <= j && Character.toLowerCase(s.charAt(i)) != Character.toLowerCase(s.charAt(j))) {
                 return false;
             }
             i++;
